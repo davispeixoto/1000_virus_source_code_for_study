@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>1000 Computer Virus source codes for study</title>
+</head>
+
+<body>
+  <script>
+    let bucket = window.location.host.split('.')[0]
+    let host = window.location.host;
+
+    let url = 'https://1000-computer-viruses-source-code.s3.amazonaws.com/';
+    fetch(url).then(res => {
+      sMyString = res.text().then(text => {
+        let Parser = new DOMParser();
+        let DOM = Parser.parseFromString(text, "text/xml");
+        DOM.childNodes.forEach((value, index, listObj) => {
+          value.childNodes.forEach((value1, index1, listObj1) => {
+            value1.childNodes.forEach((value2, index2, listObj2) => {
+              if (value2.localName === 'Key' && value2.textContent !== 'index.html') {
+                let fileName = value2.textContent;
+                let url = window.location.toString().replace('index.html', '') + fileName
+                document.writeln("<a href='" + url + "'>" + fileName + "</a> <br>")
+              }
+            })
+          })
+        })
+      })
+    })
+  </script>
+</body>
+</html>
